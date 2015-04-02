@@ -1,0 +1,52 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Home page">    
+
+
+        
+<#if frontArticle??>
+
+    <div class="jumbotron">
+        <h1>
+            ${i18n("index.latestPost")}</a>    
+        </h1>  
+        <h2>
+            <a href="/article/${frontArticle.id}">${frontArticle.title}</a>    
+        </h2>  
+        <p>${frontArticle.postedAt?date}</p>  
+        <p><#noescape>${frontArticle.content}</#noescape></p>
+    </div>
+</#if>
+
+<hr/>
+
+<#if olderArticles??>
+    
+    <#list olderArticles as article>
+        <h3>
+            <a href="/article/${article.id}">${article.title}</a>    
+        </h3>  
+        <p>${article.postedAt?date}</p>  
+    </#list>
+    
+</#if>
+
+<#if bookings??>
+	<hr/>
+    <table class="table table-bordered">
+    <tr>
+    <th>${i18n("bookingNew.user")}</th><th>${i18n("bookingNew.date")}</th><th>${i18n("bookingNew.startTime")}</th><th>${i18n("bookingNew.endTime")}</th><th>${i18n("bookingNew.duration")}</th><th>${i18n("bookingNew.title")}</th></tr>
+    <#list bookings as booking>
+    <tr>
+    	<td>${booking.user.fullname}&nbsp;</td>
+    	<td>${booking.date?date}&nbsp;</td>
+    	<td><#if booking.startTime??> ${booking.startTime?string["HH:mm"]}</#if></td>
+    	<td><#if booking.endTime??> ${booking.endTime?string["HH:mm"]}</#if></td>
+    	<td><#if booking.duration??> ${booking.duration?string["HH:mm"]}</#if></td>
+    	<td><a href="/booking/${booking.id}">${booking.title}</a></td>    
+    </tr>
+    </#list>
+    </table>
+    
+</#if>
+
+</@layout.myLayout>

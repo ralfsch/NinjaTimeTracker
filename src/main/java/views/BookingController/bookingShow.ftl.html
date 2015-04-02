@@ -1,0 +1,26 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> 
+<@layout.myLayout "Bookings">    
+    
+    
+<#if booking??>
+
+    <h1>${booking.title}</h1>  
+    <p><b>${i18n("bookingNew.user")}:</b> ${user.username} (${user.fullname})</p>
+    <p><b>${i18n("bookingNew.date")}:</b> ${booking.date?date}</p>
+    <p><b>${i18n("bookingNew.startTime")}:</b> <#if booking.startTime??> ${booking.startTime?time} <#else> unknown :-( </#if></p>
+    <p><b>${i18n("bookingNew.endTime")}:</b> <#if booking.endTime??> ${booking.endTime?time} <#else> unknown :-( </#if></p>
+    <p><b>${i18n("bookingNew.duration")}:</b> <#if booking.duration??> ${booking.duration?time} <#else> unknown :-( </#if></p>
+    
+    <p><b>${i18n("bookingNew.comment")}:</b> <#noescape>${booking.comment}</#noescape></p>
+    <p><b>${i18n("bookingNew.createdAt")}:</b> ${booking.postedAt?datetime}</p>  
+    
+<#else>
+    
+    <p>Sorry. Booking entry not found. Please go back to <a href="/index">index</a></p>
+    
+</#if>
+    
+
+     
+
+</@layout.myLayout>
