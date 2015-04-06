@@ -37,11 +37,11 @@
     <th>${i18n("bookingNew.user")}</th><th>${i18n("bookingNew.date")}</th><th>${i18n("bookingNew.startTime")}</th><th>${i18n("bookingNew.endTime")}</th><th>${i18n("bookingNew.duration")}</th><th>${i18n("bookingNew.title")}</th></tr>
     <#list bookings as booking>
     <tr>
-    	<td>${booking.user.fullname}&nbsp;</td>
-    	<td>${booking.date?date}&nbsp;</td>
-    	<td><#if booking.startTime??> ${booking.startTime?string["HH:mm"]}</#if></td>
-    	<td><#if booking.endTime??> ${booking.endTime?string["HH:mm"]}</#if></td>
-    	<td><#if booking.duration??> ${booking.duration?string["HH:mm"]}</#if></td>
+    	<td>${booking.user.fullname}</td>
+    	<td><#if booking.date??>${booking.date?date}</#if></td>
+    	<td><#if booking.startTime??>${booking.startTime?string["HH:mm"]}</#if></td>
+    	<td><#if booking.endTime??>${booking.endTime?string["HH:mm"]}</#if></td>
+    	<td><#if booking.duration??>${booking.duration?string["HH:mm"]}</#if></td>
     	<td><a href="/booking/${booking.id}">${booking.title}</a></td>    
     </tr>
     </#list>
