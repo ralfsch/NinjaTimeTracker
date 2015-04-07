@@ -16,6 +16,8 @@
 
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -77,5 +79,18 @@ public class UserDao {
         
     }
     
+    @UnitOfWork
+    public List<User> getAllUsers() {
+        
+        EntityManager entityManager = entityManagerProvider.get();
+        
+        Query q = entityManager.createQuery("SELECT x FROM User x ORDER BY x.fullname ASC");
+        List<User> users = (List<User>) q.getResultList();        
+        
+        return users;
+        
+        
+    }
+
 
 }

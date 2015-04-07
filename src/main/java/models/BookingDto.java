@@ -18,6 +18,8 @@ public class BookingDto {
     public String startTime;
     public String endTime;
     
+    public Long userId;
+    
     public BookingDto() {}
 
 }

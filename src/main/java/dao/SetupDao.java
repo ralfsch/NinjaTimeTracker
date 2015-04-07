@@ -33,6 +33,12 @@ public class SetupDao {
             User bob = new User("bob@gmail.com", "secret", "Bob");
             entityManager.persist(bob);
             
+            User joe = new User("joe@gmail.com", "secret", "Joe the 2nd user");
+            entityManager.persist(joe);
+            
+            User jill = new User("jill@gmail.com", "secret", "Jill Test");
+            entityManager.persist(jill);
+            
             // Create a new post
             Article bobPost3 = new Article(bob, "My third post", lipsum);
             entityManager.persist(bobPost3);

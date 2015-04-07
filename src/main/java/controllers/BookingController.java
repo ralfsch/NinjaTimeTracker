@@ -5,9 +5,13 @@
 package controllers;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
+import models.Article;
 import models.Booking;
 import models.BookingDto;
+import models.User;
 import ninja.Context;
 import ninja.FilterWith;
 import ninja.Result;
@@ -18,10 +22,12 @@ import ninja.validation.FieldViolation;
 import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import dao.BookingDao;
+import dao.UserDao;
 import etc.LoggedInUser;
 
 @Singleton
@@ -29,6 +35,10 @@ public class BookingController {
     
     @Inject
     BookingDao bookingDao;
+    @Inject
+    UserDao userDao;
+
+
 
     ///////////////////////////////////////////////////////////////////////////
     // Show time booking
@@ -56,7 +66,13 @@ public class BookingController {
     @FilterWith(SecureFilter.class)
     public Result bookingNew() {
 
-        return Results.html();
+	    List<User> users = userDao.getAllUsers();
+	
+	    Map<String, Object> map = Maps.newHashMap();
+	    map.put("users", users);
+	
+	    return Results.html().render("users", users);
+//        return Results.html();
 
     }
 

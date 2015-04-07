@@ -108,7 +108,7 @@ public class BookingDao {
         }
         
         Booking booking = new Booking(user, bookingDto.title, bookingDto.comment, bookingDto.date, bookingDto.startTime, bookingDto.endTime);
-        System.out.println("New Booking to create: \n   Title=" + bookingDto.title + "\n   Date=" + bookingDto.date + "\n   startTime=" + bookingDto.startTime + "\n   endTime=" + bookingDto.endTime +"\n   username=" + user.getUsername() +"\n   fullname=" + user.getFullname() +"\n");
+        System.out.println("New Booking to create: \n   Title=" + bookingDto.title + "\n   Date=" + bookingDto.date + "\n   startTime=" + bookingDto.startTime + "\n   endTime=" + bookingDto.endTime +"\n   username=" + user.getUsername() +"\n   fullname=" + user.getFullname() +"\n   userId=" + bookingDto.userId +"\n");
         entityManager.persist(booking);
         
         return true;

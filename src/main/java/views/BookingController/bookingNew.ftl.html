@@ -13,12 +13,22 @@
 <div class="container">
 
 	<h1>${i18n("bookingNew.newBooking")}</h1>
-
 	<!-- Example row of columns -->
 	<div class="row">
 		<div class="col-lg-8">
 			<form action="/booking/new" method="post" class="form-horizontal" role="form">
 
+                <div class="form-group">
+                    <label for="user" class="col-lg-2 control-label">${i18n("bookingNew.user")}</label>
+                    <div class="col-lg-10">
+                        <select name="user" id="userId" value=" " class="form-control">
+					  	    <#list users as user>
+					    	<option value=${user.id}>${user.fullname}</option>
+				    	    </#list>
+                        </select>
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <label for="title" class="col-lg-2 control-label">${i18n("bookingNew.title")}</label>
                     <div class="col-lg-10">
@@ -29,7 +39,7 @@
                 <div class="form-group">
                     <label for="date" class="col-lg-2 control-label">${i18n("bookingNew.date")}</label>
                     <div class="col-lg-10">
-                        <input type="date" name="date" id="date" value="${(flash.date!)}" class="form-control"/>
+                        <input type="date" name="date" id="date" value="${(flash.date!"")}?date" class="form-control"/>
                     </div>
                 </div>
                 
