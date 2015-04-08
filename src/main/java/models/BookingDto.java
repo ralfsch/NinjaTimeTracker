@@ -19,6 +19,7 @@ public class BookingDto {
     public String endTime;
     
     public Long userId;
+    public Long authorId;
     
     public BookingDto() {}
 

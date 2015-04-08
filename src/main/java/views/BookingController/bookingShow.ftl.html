@@ -12,7 +12,7 @@
     <p><b>${i18n("bookingNew.duration")}:</b><#if booking.duration??>${booking.duration?time} <#else> unknown :-( </#if></p>
     
     <p><b>${i18n("bookingNew.comment")}:</b> <#noescape>${booking.comment}</#noescape></p>
-    <p><b>${i18n("bookingNew.createdAt")}:</b> ${booking.postedAt?datetime}</p>  
+    <p><b>${i18n("bookingNew.createdAt")}:</b> ${booking.postedAt?datetime} ${i18n("bookingNew.createdByShort")} ${author.fullname}</p>  
     
 <#else>
     

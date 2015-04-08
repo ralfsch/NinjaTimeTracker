@@ -39,6 +39,9 @@ public class Booking {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="USER_ID", nullable=false)
     private User user;
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="AUTHOR_ID", nullable=false)
+    private User author;
     
     @Column(length = 5000) //init with VARCHAR(1000)
     private String comment;
@@ -52,6 +55,14 @@ public class Booking {
  
 	public void setUser(User user) {
 		this.user = user;
+	}
+ 
+	public User getAuthor() {
+		return this.author;
+	}
+ 
+	public void setAuthor(User author) {
+		this.author = author;
 	}
  
     public Long getId() {
@@ -157,18 +168,20 @@ public class Booking {
 
 	public Booking() {}
     
-    public Booking(User user, String title, String comment, Date date, String startTime, String endTime) {
+    public Booking(User author, User user, String title, String comment, Date date, String startTime, String endTime) {
         this.userIds = Lists.newArrayList(user.getId());
         this.title = title;
         this.comment = comment;
         this.date = date;
         this.startTime = convertTimeStringToDate(startTime);
         this.endTime = convertTimeStringToDate(endTime);
-        this.postedAt = new Date();
         
         this.duration = calculateDuration();
         
         this.user = user;
+
+        this.author = author;
+        this.postedAt = new Date();
     }
  
 }

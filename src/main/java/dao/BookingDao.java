@@ -94,21 +94,22 @@ public class BookingDao {
     
     /**
      * Returns false if user cannot be found in database.
+     * @param user 
      */
     @Transactional
-    public boolean postBooking(String username, BookingDto bookingDto) {
+    public boolean postBooking(String username, BookingDto bookingDto, User user) {
         
         EntityManager entityManager = entityManagerProvider.get();
         
         Query query = entityManager.createQuery("SELECT x FROM User x WHERE username = :usernameParam");
-        User user = (User) query.setParameter("usernameParam", username).getSingleResult();
+        User author = (User) query.setParameter("usernameParam", username).getSingleResult();
         
-        if (user == null) {
+        if (author == null) {
             return false;
         }
         
-        Booking booking = new Booking(user, bookingDto.title, bookingDto.comment, bookingDto.date, bookingDto.startTime, bookingDto.endTime);
-        System.out.println("New Booking to create: \n   Title=" + bookingDto.title + "\n   Date=" + bookingDto.date + "\n   startTime=" + bookingDto.startTime + "\n   endTime=" + bookingDto.endTime +"\n   username=" + user.getUsername() +"\n   fullname=" + user.getFullname() +"\n   userId=" + bookingDto.userId +"\n");
+        Booking booking = new Booking(author, user, bookingDto.title, bookingDto.comment, bookingDto.date, bookingDto.startTime, bookingDto.endTime);
+        System.out.println("New Booking to create: \n   Title=" + bookingDto.title + "\n   Date=" + bookingDto.date + "\n   startTime=" + bookingDto.startTime + "\n   endTime=" + bookingDto.endTime +"\n   username=" + user.getUsername() +"\n   fullname=" + user.getFullname() +"\n   userId=" + bookingDto.userId + "\n   author=" + author.getUsername() + " (" + author.getId() + ", " + author.getFullname() + ")" +"\n");
         entityManager.persist(booking);
         
         return true;

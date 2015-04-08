@@ -9,12 +9,18 @@ create table Booking (
     duration time,
     title varchar(255),
     user_id bigint not null,
+	author_id bigint not null,
     primary key (id)
 );
 
 alter table Booking
 add constraint FK_booking_user
 foreign key (user_id)
+references User;
+
+alter table Booking
+add constraint FK_booking_author
+foreign key (author_id)
 references User;
 
 create table Booking_userIds (

@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import models.Article;
 import models.Booking;
 import models.BookingDto;
 import models.User;
@@ -56,6 +55,7 @@ public class BookingController {
         Result result = Results.html();
         result.render("booking", booking);
         result.render("user", booking.getUser());
+        result.render("author", booking.getAuthor());
         return result;
 
     }
@@ -77,7 +77,7 @@ public class BookingController {
     }
 
     @FilterWith(SecureFilter.class)
-    public Result bookingNewPost(@LoggedInUser String username,
+    public Result bookingNewPost(@LoggedInUser String author,
                                  Context context,
                                  @JSR303Validation BookingDto bookingDto,
                                  Validation validation) {
@@ -105,12 +105,14 @@ public class BookingController {
             context.getFlashScope().put("startTime", bookingDto.startTime);
             context.getFlashScope().put("endTime", bookingDto.endTime);
             context.getFlashScope().put("date", bookingDto.date);
+            context.getFlashScope().put("userId",  bookingDto.userId);
 
             return Results.redirect("/booking/new");
 
         } else {
+        	User user = userDao.getUser(bookingDto.userId);
             
-            bookingDao.postBooking(username, bookingDto);
+            bookingDao.postBooking(author, bookingDto, user);
             
             context.getFlashScope().success("New booking created.");
             
