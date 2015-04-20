@@ -82,6 +82,8 @@ public class BookingController {
                                  @JSR303Validation BookingDto bookingDto,
                                  Validation validation) {
 
+    	User user = userDao.getUser(bookingDto.userId);
+        
         if (validation.hasViolations()) {
 
             String errorMsg = "Please correct field(s):";
@@ -110,8 +112,6 @@ public class BookingController {
             return Results.redirect("/booking/new");
 
         } else {
-        	User user = userDao.getUser(bookingDto.userId);
-            
             bookingDao.postBooking(author, bookingDto, user);
             
             context.getFlashScope().success("New booking created.");
