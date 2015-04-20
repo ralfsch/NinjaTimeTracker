@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="user" class="col-lg-2 control-label">${i18n("bookingNew.user")}</label>
                     <div class="col-lg-10">
-                        <select name="userId" id="userId" value=" " class="form-control">
+                        <select name="userId" id="userId" class="form-control">
 					  	    <#list users as user>
 					    	<option value=${user.id}>${user.fullname}</option>
 				    	    </#list>
@@ -41,6 +41,7 @@
                     <div class="col-lg-10">
                         <input type="date" name="date" id="date" value="${(flash.date!"")}?date" class="form-control"/>
                     </div>
+                    Last date: ${(flash.date!"")}?date
                 </div>
                 
                 <div class="form-group">
