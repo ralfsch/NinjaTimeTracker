@@ -32,36 +32,43 @@
                 <div class="form-group">
                     <label for="title" class="col-lg-2 control-label">${i18n("bookingNew.title")}</label>
                     <div class="col-lg-10">
-                        <input type="text" name="title" id="title" value="${(flash.title!"")}" class="form-control"/>
+                        <input type="text" name="title" id="title" value="${(booking.title!"")}" class="form-control"/>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="date" class="col-lg-2 control-label">${i18n("bookingNew.date")}</label>
                     <div class="col-lg-10">
-                        <input type="date" name="date" id="date" value="${(flash.date!"")}?date" class="form-control"/>
+                        <#if flash.error??> Fehler 
+                            <input type="date" name="date" id="date" value="${(booking.date!"01.01.1900")?date}" class="form-control"/>
+                        <#else> OK 
+                            <input type="date" name="date" id="date" value="" class="form-control"/>
+                        </#if>
                     </div>
-                    Last date: ${(flash.date!"")}?date
+                    <#if flash.error??>
+                      <p>Last date: ${(booking.date!"01.01.1900")?date}</p>
+                    </#if>
+                    <!--  -->
                 </div>
                 
                 <div class="form-group">
                     <label for="startTime" class="col-lg-2 control-label">${i18n("bookingNew.startTime")}</label>
                     <div class="col-lg-10">
-                        <input type="time" name="startTime" id="startTime" value="${(flash.startTime!" ")}" class="form-control"/>
+                        <input type="time" name="startTime" id="startTime" value="${(booking.startTime!" ")}" class="form-control"/>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="endTime" class="col-lg-2 control-label">${i18n("bookingNew.endTime")}</label>
                     <div class="col-lg-10">
-                        <input type="time" name="endTime" id="endTime" value="${(flash.endTime!" ")}" class="form-control"/>
+                        <input type="time" name="endTime" id="endTime" value="${(booking.endTime!" ")}" class="form-control"/>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="comment" class="col-lg-2 control-label">${i18n("bookingNew.comment")}</label>
                     <div class="col-lg-10">
-                        <textarea name="comment" class="form-control" id="comment">${(flash.comment!"")}</textarea>
+                        <textarea name="comment" class="form-control" id="comment">${(booking.comment!"")}</textarea>
                     </div>
                 </div>
 

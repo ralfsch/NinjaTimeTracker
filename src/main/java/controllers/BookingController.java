@@ -67,11 +67,13 @@ public class BookingController {
     public Result bookingNew() {
 
 	    List<User> users = userDao.getAllUsers();
+	    Booking booking = new Booking();
 	
 	    Map<String, Object> map = Maps.newHashMap();
 	    map.put("users", users);
 	
-	    return Results.html().render("users", users);
+	    return Results.html().render("users", users)
+	    		.render("booking", booking);
 //        return Results.html();
 
     }
@@ -102,14 +104,17 @@ public class BookingController {
                 }
             }
             context.getFlashScope().error(errorMsg);
-            context.getFlashScope().put("title", bookingDto.title);
-            context.getFlashScope().put("comment", bookingDto.comment);
-            context.getFlashScope().put("startTime", bookingDto.startTime);
-            context.getFlashScope().put("endTime", bookingDto.endTime);
-            context.getFlashScope().put("date", bookingDto.date);
-            context.getFlashScope().put("userId",  bookingDto.userId);
+//          context.getFlashScope().put("title", bookingDto.title);
+//          context.getFlashScope().put("comment", bookingDto.comment);
+//          context.getFlashScope().put("startTime", bookingDto.startTime);
+//          context.getFlashScope().put("endTime", bookingDto.endTime);
+//          context.getFlashScope().put("date", bookingDto.date.toLocaleString());
+//          context.getFlashScope().put("userId",  bookingDto.userId);
 
-            return Results.redirect("/booking/new");
+            Booking booking = new Booking(user, user, bookingDto.title, bookingDto.comment, bookingDto.date, bookingDto.startTime, bookingDto.endTime);
+
+            return Results.redirect("/booking/new")
+            		.render("booking", booking);
 
         } else {
             bookingDao.postBooking(author, bookingDto, user);

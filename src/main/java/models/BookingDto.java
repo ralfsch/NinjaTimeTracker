@@ -6,11 +6,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.LocalTime;
 
 public class BookingDto {
 
-    @Size(min = 5)
+    @Size(min = 4)
     public String title;
     
 //    @Size(min = 5)
