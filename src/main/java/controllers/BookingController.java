@@ -61,6 +61,31 @@ public class BookingController {
     }
     
     ///////////////////////////////////////////////////////////////////////////
+    // Edit time booking
+    ///////////////////////////////////////////////////////////////////////////
+    public Result bookingEdit(@PathParam("id") Long id) {
+
+        Booking booking = null;
+
+        if (id != null) {
+
+            booking = bookingDao.getBooking(id);
+
+        }
+	    List<User> users = userDao.getAllUsers();
+	    Map<String, Object> map = Maps.newHashMap();
+	    map.put("users", users);
+
+        Result result = Results.html();
+        result.render("booking", booking);
+        result.render("users", users);
+        result.render("user", booking.getUser());
+        result.render("author", booking.getAuthor());
+        return result;
+
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////
     // Create new time booking
     ///////////////////////////////////////////////////////////////////////////
     @FilterWith(SecureFilter.class)
@@ -113,8 +138,8 @@ public class BookingController {
 
             Booking booking = new Booking(user, user, bookingDto.title, bookingDto.comment, bookingDto.date, bookingDto.startTime, bookingDto.endTime);
 
-            return Results.redirect("/booking/new")
-            		.render("booking", booking);
+            return Results.redirect("/booking/new");
+//            		.render("booking", booking);
 
         } else {
             bookingDao.postBooking(author, bookingDto, user);

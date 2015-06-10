@@ -40,13 +40,13 @@
                     <label for="date" class="col-lg-2 control-label">${i18n("bookingNew.date")}</label>
                     <div class="col-lg-10">
                         <#if flash.error??> Fehler 
-                            <input type="date" name="date" id="date" value="${(booking.date!"01.01.1900")?date}" class="form-control"/>
+                            <input type="date" name="date" id="date" value="${(booking.date!"1900-01-01")?iso_utc}" class="form-control"/>
                         <#else> OK 
                             <input type="date" name="date" id="date" value="" class="form-control"/>
                         </#if>
                     </div>
                     <#if flash.error??>
-                      <p>Last date: ${(booking.date!"01.01.1900")?date}</p>
+                      <p>Last date: ${(booking.date!"unbekannt")?iso_utc}</p>
                     </#if>
                     <!--  -->
                 </div>

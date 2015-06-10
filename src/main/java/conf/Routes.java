@@ -81,6 +81,12 @@ public class Routes implements ApplicationRoutes {
         router.GET().route("/booking/{id}").with(BookingController.class, "bookingShow");
 
         ///////////////////////////////////////////////////////////////////////
+        // Edit time booking
+        ///////////////////////////////////////////////////////////////////////
+        router.GET().route("/booking/edit/{id}").with(BookingController.class, "bookingEdit");
+        router.POST().route("/booking/edit").with(BookingController.class, "bookingNewPost");
+
+        ///////////////////////////////////////////////////////////////////////
         // Api for management of software
         ///////////////////////////////////////////////////////////////////////
         router.GET().route("/api/{username}/articles.json").with(ApiController.class, "getArticlesJson");
