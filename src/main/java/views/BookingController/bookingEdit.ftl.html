@@ -1,0 +1,80 @@
+<#import "../layout/defaultLayout.ftl.html" as layout> <@layout.myLayout i18n("bookingEdit.pageTitle")>
+
+
+<script defer type="text/javascript">
+	$(window).load(function() {
+		tinyMCE.init({
+			mode : "textareas"
+		});
+	});
+</script>
+
+
+<div class="container">
+
+	<h1>${i18n("bookingEdit.editBooking")}</h1>
+	<!-- Example row of columns -->
+	<div class="row">
+		<div class="col-lg-8">
+			<form action="/booking/edit" method="post" class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="user" class="col-lg-2 control-label">${i18n("bookingNew.user")}</label>
+                    <div class="col-lg-10">
+                        <select name="userId" id="userId" class="form-control">
+					  	    <#list users as user>
+					    	<option value=${user.id}>${user.fullname}</option>
+				    	    </#list>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title" class="col-lg-2 control-label">${i18n("bookingNew.title")}</label>
+                    <div class="col-lg-10">
+                        <input type="text" name="title" id="title" value="${(booking.title!"")}" class="form-control"/>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date" class="col-lg-2 control-label">${i18n("bookingNew.date")}</label>
+                    <div class="col-lg-10">
+                        <input type="date" name="date" id="date" value="${(booking.date!"1900-01-01")?date}" class="form-control"/>
+                        Date: ${(booking.date!"01.01.1900")?date}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="startTime" class="col-lg-2 control-label">${i18n("bookingNew.startTime")}</label>
+                    <div class="col-lg-10">
+                        <input type="time" name="startTime" id="startTime" value="${(booking.startTime!" ")}" class="form-control"/>
+                        Start: ${(booking.startTime!" ")}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="endTime" class="col-lg-2 control-label">${i18n("bookingNew.endTime")}</label>
+                    <div class="col-lg-10">
+                        <input type="time" name="endTime" id="endTime" value="${(booking.endTime!" ")}" class="form-control"/>
+                        End: ${(booking.endTime!" ")}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comment" class="col-lg-2 control-label">${i18n("bookingNew.comment")}</label>
+                    <div class="col-lg-10">
+                        <textarea name="comment" class="form-control" id="comment">${(booking.comment!"")}</textarea>
+                    </div>
+                </div>
+
+				<input type="submit" value="${i18n("bookingNew.postNewBooking")}" class="btn btn-success pull-right" />
+
+			</form>
+
+		</div>
+
+	</div>
+</div>
+
+
+</@layout.myLayout>
